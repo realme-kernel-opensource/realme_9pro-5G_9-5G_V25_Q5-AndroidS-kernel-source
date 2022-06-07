@@ -1,0 +1,77 @@
+# SPDX-License-Identifier: GPL-2.0-only
+source "drivers/power/avs/Kconfig"
+source "drivers/power/reset/Kconfig"
+source "drivers/power/supply/Kconfig"
+
+# /* Add for charging */
+config OPLUS_CHG
+	tristate "OPLUS CHARGER KO module"
+	default m
+	help
+	  Enables support for the oplus charging framework
+
+config OPLUS_SM4350R_CHARGER
+	bool "OPLUS SM4350 charger driver"
+	default n
+	help
+	  Enables support for the oplus charging framework
+
+config OPLUS_SM6375R_CHARGER
+	bool "OPLUS SM6375 charger driver"
+	default n
+	help
+	  Enables support for the oplus charging framework
+
+config OPLUS_SHORT_C_BATT_CHECK
+	bool "OPLUS_SHORT_C_BATT CHECK SUPPORT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_SMART_CHARGER_SUPPORT
+	bool "OPLUS smart charger support"
+	help
+	  Say Y to include support
+
+config OPLUS_SHORT_HW_CHECK
+	bool "OPLUS_SHORT_HW CHECK SUPPORT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_CHIP_SOC_NODE
+	bool "OPLUS chip soc node"
+	help
+	  Say Y to include support
+
+config OPLUS_SHORT_IC_CHECK
+	bool "OPLUS_SHORT_IC CHECK SUPPORT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_RTC_DET_SUPPORT
+	bool "OPLUS RTC DET SUPPORT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_CHECK_CHARGERID_VOLT
+	bool "OPLUS CHECK CHARGERID VOLT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_SHIP_MODE_SUPPORT
+	bool "OPLUS_SHIP_MODE_SUPPORT"
+	default n
+	help
+	  Say Y to include support
+
+config OPLUS_SHORT_USERSPACE
+	bool "OPLUS batt userspace"
+	help
+	  Say Y to include support
+source "drivers/power/oplus/Kconfig"
+source "drivers/power/oplus_util/Kconfig"
+#endif

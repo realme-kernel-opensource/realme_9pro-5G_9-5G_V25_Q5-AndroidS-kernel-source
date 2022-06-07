@@ -1,0 +1,18 @@
+/dts-v1/;
+/plugin/;
+
+#include "holi-oscar-overlay-common.dtsi"
+#include "holi-oscar-216E9-overlay.dtsi"
+#include "sensor/oscar-216E9-sensor-qrd.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Blair QRD NOPMI";
+	compatible = "qcom,blair-qrd", "qcom,blair", "qcom,qrd";
+	qcom,msm-id = <507 0x10000>;
+	qcom,board-id = <0x1000B 0>;
+	oplus,dtsi_no = <136937>;
+};
+
+#include "camera/holi-camera-sensor-qrd.dtsi"
+#include "camera/wl2868c.dtsi"
+#include "charge/oplus_charge_holi_18w.dtsi"

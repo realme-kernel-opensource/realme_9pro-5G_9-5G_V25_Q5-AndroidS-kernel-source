@@ -1,0 +1,131 @@
+&soc {
+	oplus_sensor {
+			compatible = "oplus,sensor-devinfo";
+			als-row-coe = <110>;
+			/*enum {LSM6DSM = 0x01, BMI160 = 0x02, LSM6DS3 = 0x04, BMI260 = 0x08};*/
+			gsensor@0 {
+					sensor-name = <0x20>;//ICM4X6XX
+					sensor-direction = <0>;
+					sensor-index = <0>;//source num
+					sensor-type = <0>;//OPLUS_ACCEL
+			};
+			gsensor@1 {
+					sensor-name = <0x08>;//BMI26X
+					sensor-direction = <4>;
+					sensor-index = <1>;//source num
+					sensor-type = <0>;//OPLUS_ACCEL
+			};
+			/* enum {AKM0991X = 0x01, MMC5603 = 0x02, MXG4300 = 0x04};*/
+			msensor@0 {
+					sensor-name = <0x04>;//AKM0991X
+					sensor-direction = <0>;
+					sensor-index = <0>;
+					sensor-type = <2>;//OPLUS_MAG
+					parameter-number= <18>;
+					soft-mag-parameter = <10033 0 170 1 189 1 77 0 9940 0 169 1 366 0 69 0 10021 0>;//e00 sign e01 sign...
+			};
+			msensor@1 {
+					sensor-name = <0x02>;//MMC5603
+					sensor-direction = <0>;
+					sensor-index = <1>;
+					sensor-type = <2>;//OPLUS_MAG
+					parameter-number= <18>;
+					soft-mag-parameter = <10000 0 0 0 0 0 0 0 10000 0 0 0 0 0 0 0 10000 0>;//e00 sign e01 sign...
+			};
+			/*enum {STK3A5X=0x01,TCS3701=0x02,TCS3408=0x04,STK326X=0x08,MN78911=0x10};*/
+			/*enum {NORMAL=0x01,UNDER_LCD=0x02,VIRTUAL_UNDER_LCD=0x03}*/
+			lsensor@0 {
+					sensor-name = <0x01>;//TCS3701
+					sensor-index = <0>;
+					sensor-type = <3>;//OPLUS_ALS
+					bus-number = <2>;
+					irq-number = <98>;
+					als-type = <1>;//UNDER_LCD
+					is-unit-device = <1>;
+					is-als-dri = <1>;
+					als-factor = <500>;
+					is_als_initialed = <0>;
+					als_buffer_length = <10>;
+					normalization_value = <549>;
+					use_lb_algo = <0>;
+					//als_ratio_type = <1>; // use for stk33502 to split light, <0:type old; 1:type abcde; 2:type accordance>
+			};
+			psensor@0 {
+				sensor-name = <0x01>;//TCS3701
+				sensor-index = <0>;
+				sensor-type = <4>;//OPLUS_PROXIMITY
+				bus-number = <2>;
+				irq-number = <98>;
+				ps-cail-type = <2>;
+				ps-type = <1>;
+				is_ps_initialzed = <0>;
+				low_step = <300>;
+				high_step = <400>;
+				low_limit = <650>;
+				high_limit = <1050>;
+				dirty_low_step = <300>;
+				dirty_high_step = <400>;
+				ps_dirty_limit = <1800>;
+				ps_ir_limit = <2000>;
+				ps_adjust_min = <0>;
+				ps_adjust_max = <1850>;
+				sampling_count = <5>;
+				step_max = <400>;
+				step_min = <100>;
+				step_div = <1500>;
+				anti_shake_delta = <70>;
+				dynamic_cali_max = <5000>;
+				raw2offset_radio = <1000>;
+				offset_max = <60000>;
+				offset_range_min = <0>;
+				offset_range_max = <65535>;
+				force_cali_limit = <2000>;
+				cali_jitter_limit = <20>;
+				cal_offset_margin = <3000>;
+				parameter-number = <8>;
+				sensor-reg = <0x01 0x32
+						0x4E 0x07
+						0xDB 0x00
+						0xA1 0x7C>; //override special reg
+						/*sensor-reg end*/
+			};
+			/*sarsensor@0 {
+				sensor-name = <0x2>;//SX9331
+				sensor-index = <0>;
+				sensor-type = <5>;//OPLUS_SAR
+				channel-num = <3>;
+				is-dc-offset = <1>;
+				dc-offset = <1 2 3 4 5 30001 30002 30003 30004 30005>;
+			};*/
+			/*virtual sensor
+			enum sensor_algo_id {
+					OPLUS_PICKUP_DETECT,
+					OPLUS_LUX_AOD,
+					OPLUS_TP_GESTURE,
+					OPLUS_FP_DISPLAY,
+					OPLUS_FREE_FALL,
+					OPLUS_CAMERA_PROTECT,
+					SENSOR_ALGO_NUM
+			}*/
+			pickup_detect {
+					sensor-type = <0>; //OPLUS_PICKUP_DETECT
+					is-virtual-sensor;
+					is-need-prox = <1>;
+					prox-type = <0>; // 0 - proximity; 1 - proximity_fake
+			};
+			lux_aod {
+				sensor-type = <1>; //OPLUS_LUX_AOD
+				is-virtual-sensor;
+				thrd-low = <12>;
+				thrd-high = <50>;
+				als-type = <1>;
+			};
+			fp_display {
+				sensor-type = <3>;//OPLUS_FP_DISPLAY
+				is-virtual-sensor;
+				prox-type = <0>; // 0 - proximity; 1 - proximity_fake
+			};
+			
+	};
+};
+

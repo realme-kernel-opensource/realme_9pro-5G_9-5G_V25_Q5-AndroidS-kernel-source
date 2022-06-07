@@ -1,0 +1,182 @@
+/**********************************************************************************
+** File: - mozart-holi-audio-overlay.dtsi
+**
+** Copyright (C), 2021-2022, OPLUS Mobile Comm Corp., Ltd
+**
+** Description:
+**     OPLUS Audio Module Device Tree.
+**
+** Version: 1.0
+** --------------------------- Revision History: --------------------------------
+**             <author>                      <date>                  <desc>
+***********************************************************************************/
+#include "oplus-smartpa-sia81xx.dtsi"
+&pil_adsp_mem {
+	reg = <0x0 0x86700000 0x0 0x2800000>;
+};
+
+&pil_cdsp_mem {
+	reg = <0x0 0x9B800000 0x0 0x1e00000>;
+};
+
+&q6core {
+        /*
+        cdc_pri_mi2s_gpios: msm_cdc_pinctrl_pri {
+                compatible = "qcom,msm-cdc-pinctrl";
+                pinctrl-names = "aud_active", "aud_sleep";
+                pinctrl-0 = <&lpi_i2s1_sck_sleep &lpi_i2s1_ws_sleep
+                             &lpi_i2s1_sd0_sleep &lpi_i2s1_sd1_sleep>;
+                pinctrl-1 = <&lpi_i2s1_sck_active &lpi_i2s1_ws_active
+                             &lpi_i2s1_sd0_active &lpi_i2s1_sd1_active>;
+                qcom,lpi-gpios;
+                #gpio-cells = <0>;
+        };
+        */
+        cdc_dmic01_pinctrl {
+                status = "disabled";
+        };
+
+        cdc_dmic23_pinctrl {
+                status = "disabled";
+        };
+
+        wsa_clk {
+                status = "disabled";
+        };
+};
+
+&holi_snd {
+	qcom,audio-routing =
+		"AMIC1", "Analog Mic1",
+		"Analog Mic1", "MIC BIAS1",
+		"AMIC2", "Analog Mic2",
+		"Analog Mic2", "MIC BIAS2",
+		"AMIC3", "Analog Mic3",
+		"Analog Mic3", "MIC BIAS3",
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC0", "MIC BIAS1",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC1", "MIC BIAS1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC2", "MIC BIAS3",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC3", "MIC BIAS3",
+		"IN1_HPHL", "HPHL_OUT",
+		"IN2_HPHR", "HPHR_OUT",
+		"IN3_AUX", "AUX_OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"TX SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC0", "VA MIC BIAS1",
+		"VA DMIC1", "VA MIC BIAS1",
+		"VA DMIC2", "VA MIC BIAS3",
+		"VA DMIC3", "VA MIC BIAS3";
+	qcom,msm-mbhc-moist-cfg = <1>, <3>, <0>;
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
+	qcom,msm-mbhc-hphl-swh = <1>;
+	qcom,msm-mbhc-gnd-swh = <1>;
+	qcom,msm-mbhc-hs-mic-max-threshold-mv = <2600>;
+	qcom,msm-mbhc-hs-mic-min-threshold-mv = <75>;
+
+	//qcom,pri-mi2s-gpios = <&cdc_pri_mi2s_gpios>;
+
+	oplus,mbhc-check-cross-conn = <0>;
+
+	oplus,mbhc-headset-micbias-alwayon = <1>;
+
+	//qcom,mi2s-audio-intf = <1>;
+	//qcom,auxpcm-audio-intf = <1>;
+	//qcom,tdm-audio-intf = <1>;
+
+	/delete-property/ qcom,cdc-dmic01-gpios;
+	/delete-property/ qcom,cdc-dmic23-gpios;
+
+	oplus,speaker-pa = "sia81xx";
+};
+
+&bolero {
+        qcom,num-macros = <3>;
+};
+
+&soc {
+        /*oplus,audio-drv {
+                compatible = "oplus,asoc-audio";
+                //for nxp speaker
+                oplus,speaker-vendor = "nxp";
+                oplus,speaker-i2s-id = <0>;
+                oplus,speaker-codec-name = "tfa98xx.2-0034";
+                oplus,speaker-codec-dai-name = "tfa98xx-aif-2-34";
+        };*/
+
+        wsa_reset_gpio {
+                status = "disabled";
+        };
+
+        wsa_ana_clk {
+                status = "disabled";
+        };
+};
+
+&wcd937x_codec {
+	qcom,cdc-micbias1-mv = <2700>;
+	qcom,cdc-micbias2-mv = <2700>;
+	qcom,cdc-micbias3-mv = <2700>;
+	oplus,mbhc_enable_hp_impedance_detect = <0>;
+};
+
+&wsa881x_i2c_e {
+	status = "disabled";
+};
+
+&wsa881x_i2c_44 {
+	status = "disabled";
+};
+
+&wsa881x_i2c_f {
+	status = "disabled";
+};
+
+&wsa881x_i2c_45 {
+	status = "disabled";
+};
+
+/*&smb1396 {
+	status = "disabled";
+};*/
+
+/*
+&qupv3_se10_i2c {
+        status = "disabled";
+        tfa98xx@34 {
+                compatible = "nxp,tfa98xx";
+                reg = <0x34>;
+                tfa9874_vdd-supply = <&L9A>;
+                tfa_min_range = <5000>;
+                tfa_max_range = <7800>;
+                reset-gpio = <&tlmm 11 0x00>;
+                //tfa_channel = <1>;
+                status = "okay";
+        };
+};
+*/
+/*
+&dai_mi2s0 {
+        compatible = "qcom,msm-dai-q6-mi2s";
+        qcom,msm-dai-q6-mi2s-dev-id = <0>;
+        qcom,msm-mi2s-rx-lines = <1>;
+        qcom,msm-mi2s-tx-lines = <2>;
+};
+*/
